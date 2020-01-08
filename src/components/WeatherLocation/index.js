@@ -26,6 +26,12 @@ class WeatherLocation extends Component{
             data: data1
         }
     }
+    // ----  2
+    // ultimas versiones no es necesario el contructor se puede hacer asi simple 
+    // state = {
+    //     city: 'Santiago',
+    //     data: data1
+    // }
 
     handlerUpdateClick = () =>{
         this.setState({
@@ -35,13 +41,25 @@ class WeatherLocation extends Component{
         console.log("actualizado");
     }
 
-    render = () => (
-        <div className="weatherLocation">
-            <Location city={this.state.city}/>
-            <WeatherData props={this.state.data}/>            
-            <button onClick={ this.handlerUpdateClick }>Actualizar</button>
-        </div>
-    );
+    
+    render = () => {
+        const {city, data} = this.state;
+        return(
+            <div className="weatherLocation">
+                <Location city={city}/>
+                <WeatherData props={data}/>            
+                <button onClick={ this.handlerUpdateClick }>Actualizar</button>
+            </div>
+        );
+    };
+    // ---- render 2
+    // render = () => (
+    //     <div className="weatherLocation">
+    //         <Location city={this.state.city}/>
+    //         <WeatherData props={this.state.data}/>            
+    //         <button onClick={ this.handlerUpdateClick }>Actualizar</button>
+    //     </div>
+    // );
 };
 
 // ** arrow function
