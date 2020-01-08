@@ -21,7 +21,7 @@ const WeatherTemperature = ({temperature,weatherState}) => {
 
 WeatherTemperature.propTypes  = {
     temperature : PropTypes.number.isRequired,
-    weatherState : PropTypes.string.isRequired
+    weatherState : PropTypes.string
 };
 
 export default WeatherTemperature;
