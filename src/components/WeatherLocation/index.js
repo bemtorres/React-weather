@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import Location from './Location';
 import WeatherData from './WeatherData/index';
+import convert from 'convert-units';
 import './styles.css';
  
 const location ="Santiago,cl";
@@ -42,15 +43,19 @@ class WeatherLocation extends Component{
         console.log(weather);
         return 'sun';
     }
+    getTemp = (kelvin) =>{
+        return  convert(kelvin).from('K').to('C').toFixed(2);
+    }
     getData = (weather_data) =>{
         const { humidity, temp } = weather_data.main;
         const { speed } = weather_data.wind;
         // const weatherState = this.getWeatherState(this.weather);
         const weatherState = weather_data.weather[0].main;
+        const temperature = this.getTemp(temp);
 
         const data = {
             humidity,
-            temperature: temp,
+            temperature,
             weatherState,
             wind: `${speed} m/s`,
         }
