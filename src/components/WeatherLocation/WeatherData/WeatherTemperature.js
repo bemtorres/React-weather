@@ -1,13 +1,24 @@
 import React from 'react';
-import { WiDaySunny, WiHail } from "weather-icons-react";
+import { WiDaySunny, WiDaySnowThunderstorm, WiCloudy, WiDaySleet, WiRain, WiDaySnowWind, WiAlien } from "weather-icons-react";
 import PropTypes from 'prop-types';
 
 const getWeatherIcon = (weatherState) => {
+    const size = 60;
     switch (weatherState) {
-        case "cloud":
-            return (<WiHail className='icon' size={60} />);    
+        case "Thunderstorm":
+            return  (<WiDaySnowThunderstorm className='icon' size={size}/>);
+        case "Drizzle":
+            return  (<WiDaySleet className='icon' size={size}/>);
+        case "Rain":
+            return  (<WiRain className='icon' size={size}/>);
+        case "Snow":
+            return  (<WiDaySnowWind className='icon' size={size}/>);
+        case "Clear":
+            return  (<WiDaySunny className='icon' size={size}/>);
+        case "Clouds":
+            return (<WiCloudy className='icon' size={size} />);    
         default:
-            return (<WiDaySunny className='icon' size={60} color='#fff' />);
+            return (<WiAlien className='icon' size={size} />);
     }
 };
 
