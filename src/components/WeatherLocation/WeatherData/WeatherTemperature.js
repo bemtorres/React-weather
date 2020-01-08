@@ -5,17 +5,18 @@ import PropTypes from 'prop-types';
 const getWeatherIcon = (weatherState) => {
     switch (weatherState) {
         case "cloud":
-            return (<WiHail size={30} />);    
+            return (<WiHail className='icon' size={60} />);    
         default:
-            return (<WiDaySunny size={30} color='#fff' />);
+            return (<WiDaySunny className='icon' size={60} color='#fff' />);
     }
 };
 
 const WeatherTemperature = ({temperature,weatherState}) => {
     // const  {temperature, weatherState } = props;
-    return ( <div>       
+    return ( <div className='weatherTemperatureCont'>       
         { getWeatherIcon(weatherState) }
-        <span>{temperature} C°</span>
+        <span className='temperature'>{temperature}</span>
+        <span className='temperaturetype'>C°</span>
     </div>);
 };
 

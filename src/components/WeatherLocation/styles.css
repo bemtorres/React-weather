@@ -1,0 +1,15 @@
+
+.weatherLocation{
+    width: 100%;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;    
+}
+
+.locationCount{
+    width: 400px;
+    height: 35px;
+    text-align: left;
+    /* background: green; */
+    padding-left: 15px;
+    color: #888;
+}
