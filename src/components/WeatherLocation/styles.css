@@ -1,8 +1,13 @@
 
-.weatherLocation{
-    width: 100%;
+.weatherLocationCont{
+    width: calc(100% - 20px);
     padding: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    padding: 25px;
     font-family: 'Roboto', sans-serif;    
+    min-width: 430px;
 }
 
 .locationCount{
