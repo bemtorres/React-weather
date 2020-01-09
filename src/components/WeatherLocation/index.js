@@ -130,7 +130,7 @@ class WeatherLocation extends Component{
     //         <button onClick={ this.handlerUpdateClick }>Actualizar</button>
     //     </div>
     // );
-};
+}
 
 // ** arrow function
 // const WeatherLocation = () => (
