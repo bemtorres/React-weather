@@ -3,7 +3,7 @@ import Location from './Location';
 import WeatherData from './WeatherData/index';
 import transformWeather from './../../services/transformWeather';
 import PropTypes from 'prop-types';
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import './styles.css';
 import { CircularProgress } from '@material-ui/core';
  
@@ -121,7 +121,7 @@ class WeatherLocation extends Component{
                 <Location city={city}/>
                 {data ?  <WeatherData props={data}/>  : <CircularProgress variant="determinate" value={55} />}          
                  
-                <Button variant="contained" color="primary" onClick={ this.handlerUpdateClick }>Actualizar</Button>
+                {/* <Button variant="contained" color="primary" onClick={ this.handlerUpdateClick }>Actualizar</Button> */}
             </div>
         );
     };
