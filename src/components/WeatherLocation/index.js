@@ -1,7 +1,7 @@
 import React , {Component} from 'react';
 import Location from './Location';
 import WeatherData from './WeatherData/index';
-import convert from 'convert-units';
+import transformWeather from './../../services/transformWeather';
 import './styles.css';
  
 const location ="Santiago,cl";
@@ -13,12 +13,12 @@ const data1 = {
     humidity: 100,
     wind: '200 m/s'
 };
-const data2 = {
-    temperature: -10,
-    weatherState: "cloud",
-    humidity: 100,
-    wind: '200 m/s'
-};
+// const data2 = {
+//     temperature: -10,
+//     weatherState: "cloud",
+//     humidity: 100,
+//     wind: '200 m/s'
+// };
 
 class WeatherLocation extends Component{ 
 
@@ -27,8 +27,10 @@ class WeatherLocation extends Component{
         // this.state = data1;
         this.state = {
             city: 'Santiago',
-            data: data1
+            // data: data1
+            data:null
         }
+        console.log("constructor");
     }
     // ----  2
     // ultimas versiones no es necesario el contructor se puede hacer asi simple 
@@ -38,29 +40,30 @@ class WeatherLocation extends Component{
     // }
 
     // creando un modelo de la api a obj
-    getWeatherState = weather =>{
-        // return SUN;
-        console.log(weather);
-        return 'sun';
-    }
-    getTemp = (kelvin) =>{
-        return  convert(kelvin).from('K').to('C').toFixed(2);
-    }
-    getData = (weather_data) =>{
-        const { humidity, temp } = weather_data.main;
-        const { speed } = weather_data.wind;
-        // const weatherState = this.getWeatherState(this.weather);
-        const weatherState = weather_data.weather[0].main;
-        const temperature = this.getTemp(temp);
+    // Cambio de lado
+    // getWeatherState = weather =>{
+    //     // return SUN;
+    //     console.log(weather);
+    //     return 'sun';
+    // }
+    // getTemp = (kelvin) =>{
+    //     return  convert(kelvin).from('K').to('C').toFixed(2);
+    // }
+    // getData = (weather_data) =>{
+    //     const { humidity, temp } = weather_data.main;
+    //     const { speed } = weather_data.wind;
+    //     // const weatherState = this.getWeatherState(this.weather);
+    //     const weatherState = weather_data.weather[0].main;
+    //     const temperature = this.getTemp(temp);
 
-        const data = {
-            humidity,
-            temperature,
-            weatherState,
-            wind: `${speed} m/s`,
-        }
-        return data;
-    }
+    //     const data = {
+    //         humidity,
+    //         temperature,
+    //         weatherState,
+    //         wind: `${speed} m/s`,
+    //     }
+    //     return data;
+    // }
 
 
     handlerUpdateClick = () =>{
@@ -68,9 +71,11 @@ class WeatherLocation extends Component{
         .then( resp => {
             return resp.json();
         }).then(weather_data =>{
-            const data = this.getData(weather_data);
+            // const data = this.getData(weather_data);
+            const data = transformWeather(weather_data);
+            
             this.setState({data});
-            console.log(weather_data);
+            // console.log(weather_data);
         });
         // this.setState({
         //     city : 'Calera de tango',
@@ -78,14 +83,38 @@ class WeatherLocation extends Component{
         // });
         // console.log("actualizado");
     }
+    // LIFECYCLE
+    // UNSAFE_componentWillMount en el update del 2018 se cambio esto para el construct
+    UNSAFE_componentWillMount() {
+        this.handlerUpdateClick();
+        console.log("componentWillMount");
+    }
+
+    // componentDidMount() {
+    //     console.log("componentDidMount");
+    // }
+
+    // componentWillUnmount() {
+    //     console.log("componentWillUnmount");
+    // }
+
+    // componentWillUpdate() {
+    //     console.log("componentWillUpdate");
+    // }
+
+    // componentDidUpdate() {
+    //     console.log("componentDidUpdate");
+    // }
 
     
+        
     render = () => {
-        const {city, data} = this.state;
+        const {city, data} = this.state;        
+        console.log("render");
         return(
             <div className="weatherLocation">
                 <Location city={city}/>
-                <WeatherData props={data}/>            
+                {data ?  <WeatherData props={data}/>  : 'Cargando...'}           
                 <button onClick={ this.handlerUpdateClick }>Actualizar</button>
             </div>
         );
