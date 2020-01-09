@@ -2,17 +2,19 @@ import React , {Component} from 'react';
 import Location from './Location';
 import WeatherData from './WeatherData/index';
 import transformWeather from './../../services/transformWeather';
+import Button from "@material-ui/core/Button";
 import './styles.css';
+import { CircularProgress } from '@material-ui/core';
  
 const location ="Santiago,cl";
 const api_key = "dab0117ff85c4b6234172aae16325bbb";
 const api_wather = `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${api_key}`;
-const data1 = {
-    temperature: 10,
-    weatherState: "cloud",
-    humidity: 100,
-    wind: '200 m/s'
-};
+// const data1 = {
+//     temperature: 10,
+//     weatherState: "cloud",
+//     humidity: 100,
+//     wind: '200 m/s'
+// };
 // const data2 = {
 //     temperature: -10,
 //     weatherState: "cloud",
@@ -30,7 +32,7 @@ class WeatherLocation extends Component{
             // data: data1
             data:null
         }
-        console.log("constructor");
+        // console.log("constructor");
     }
     // ----  2
     // ultimas versiones no es necesario el contructor se puede hacer asi simple 
@@ -87,7 +89,7 @@ class WeatherLocation extends Component{
     // UNSAFE_componentWillMount en el update del 2018 se cambio esto para el construct
     UNSAFE_componentWillMount() {
         this.handlerUpdateClick();
-        console.log("componentWillMount");
+        // console.log("componentWillMount");
     }
 
     // componentDidMount() {
@@ -110,12 +112,13 @@ class WeatherLocation extends Component{
         
     render = () => {
         const {city, data} = this.state;        
-        console.log("render");
+        // console.log("render");
         return(
             <div className="weatherLocation">
                 <Location city={city}/>
-                {data ?  <WeatherData props={data}/>  : 'Cargando...'}           
-                <button onClick={ this.handlerUpdateClick }>Actualizar</button>
+                {data ?  <WeatherData props={data}/>  : <CircularProgress variant="determinate" value={55} />}          
+                 
+                <Button variant="contained" color="primary" onClick={ this.handlerUpdateClick }>Actualizar</Button>
             </div>
         );
     };
