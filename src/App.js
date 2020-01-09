@@ -27,6 +27,7 @@ class App extends Component {
   }
 
   render(){
+      // const {city} = this.state;
       return (
         <div>
           <Grid>
@@ -48,7 +49,7 @@ class App extends Component {
               <Col xs={12} md={6}>
                 <Paper elevation={4} />
                   <div className='detail'>
-                      <ForecastExtended city={this.state.city} />
+                  { this.state.city ? <ForecastExtended city={this.state.city} /> : '' }
                   </div>
                 <Paper />
               </Col>     

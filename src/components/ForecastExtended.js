@@ -10,7 +10,7 @@ class ForecastExtended  extends Component {
         const {city} = this.props;
         
         return(
-            <div>Informacion Data {city}</div>
+            <div>Información Data {city}</div>
         );
     }
 }
