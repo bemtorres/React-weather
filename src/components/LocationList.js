@@ -2,24 +2,32 @@ import React from 'react';
 import WeatherLocation from './WeatherLocation';
 import PropTypes from 'prop-types';
 
-const strToComponent = cities => (
-    // cities.map( city => ( <WeatherLocation city={city} /> ) )    
+
+
+const LocationList  = ({ cities,onSelectedLocation }) =>  {
     
-    // cities.map( (city, index ) => ( <WeatherLocation city={city} key={index}/> ) )   
-    
-    cities.map( city => ( <WeatherLocation city={city} key={city}/> ) )   
-);
+    const handleWeatherLocationClick = city => {
+        console.log(city);
+        onSelectedLocation(city);
+    };
 
+    const strToComponent = cities => (   
+        cities.map( city => (
+            <WeatherLocation city={city} key={city} onWeatherLocationClick={ () => handleWeatherLocationClick(city) } /> 
+            ) 
+        )   
+    );
 
-const LocationList  = ({ cities }) => (   
-    <div>
-        {strToComponent(cities)}
-        {/* <WeatherLocation city={'Santiago,cl'}/> */}
-    </div>
+    return (
+        <div>
+            {strToComponent(cities)}
+        </div>
+    );
+}
 
-)
 LocationList.propTypes = {
     cities: PropTypes.array.isRequired,
+    onSelectedLocation : PropTypes.func,
 }
 
 export default LocationList;
