@@ -1,11 +1,11 @@
 import React from 'react';
-import WeatherLocation from './components/WeatherLocation/index';
+import LocationList from './components/LocationList';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header"> 
-        <WeatherLocation />    
+        <LocationList />    
       </header>   
     </div>
   );

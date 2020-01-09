@@ -2,13 +2,14 @@ import React , {Component} from 'react';
 import Location from './Location';
 import WeatherData from './WeatherData/index';
 import transformWeather from './../../services/transformWeather';
+import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import './styles.css';
 import { CircularProgress } from '@material-ui/core';
  
-const location ="Santiago,cl";
+
+const url = "http://api.openweathermap.org/data/2.5/weather";
 const api_key = "dab0117ff85c4b6234172aae16325bbb";
-const api_wather = `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${api_key}`;
 // const data1 = {
 //     temperature: 10,
 //     weatherState: "cloud",
@@ -24,11 +25,11 @@ const api_wather = `http://api.openweathermap.org/data/2.5/weather?q=${location}
 
 class WeatherLocation extends Component{ 
 
-    constructor(){
+    constructor({ city }){
         super();
         // this.state = data1;
         this.state = {
-            city: 'Santiago',
+            city,
             // data: data1
             data:null
         }
@@ -69,6 +70,8 @@ class WeatherLocation extends Component{
 
 
     handlerUpdateClick = () =>{
+        const {city} = this.state;
+        const api_wather = `${url}?q=${city}&APPID=${api_key}`;
         fetch(api_wather)
         .then( resp => {
             return resp.json();
@@ -139,5 +142,9 @@ class WeatherLocation extends Component{
 //         <WeatherData props={data}/>
 //     </div>
 // )
+WeatherLocation.propTypes = {
+    city : PropTypes.string,
+}
+
 
 export default WeatherLocation;
